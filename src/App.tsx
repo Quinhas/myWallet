@@ -1,12 +1,17 @@
+import { Paper } from '@material-ui/core';
 import React from 'react';
-import { Layout } from './components';
+import { ThemeProvider } from 'styled-components';
+import { Dashboard } from './pages';
 import GlobalStyles from './styles/GlobalStyles';
+import { DarkTheme, LightTheme } from './styles/themes';
 
 function App() {
   return (
     <>
-      <GlobalStyles/>
-      <Layout/>
+      <ThemeProvider theme={LightTheme}>
+        <GlobalStyles/>
+        <Dashboard/>
+      </ThemeProvider>
     </>
   );
 }

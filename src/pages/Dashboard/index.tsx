@@ -1,6 +1,11 @@
+import { Navbar } from "../../components";
+
 const Dashboard: React.FC = () => {
   return (
-    <h1>Dashboard Page</h1>
+    <>
+      <Navbar/>
+      <h1>Dashboard Page</h1>
+    </>
   )
 }
 
