@@ -1,9 +1,9 @@
 import { Container } from './styles';
 
-const Content: React.FC = () => {
+const Content: React.FC = ({ children }) => {
   return (
     <Container>
-      <h1>Content Component</h1>
+      {children}
     </Container>
   )
 }

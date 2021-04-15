@@ -7,7 +7,8 @@ export const Container = styled.div`
   padding: 0 10px;
   color: ${props => props.theme.colors.dark};
   background-color: ${props => props.theme.colors.white};
-  box-shadow: ${props => props.theme.shadows.shadow_sm};
+  box-shadow: ${props => props.theme.elevations.sm};
+  padding: 0 1.8rem;
 `
 
 export const Profile = styled.div`

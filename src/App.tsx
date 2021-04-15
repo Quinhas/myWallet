@@ -1,16 +1,22 @@
-import { Paper } from '@material-ui/core';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Dashboard } from './pages';
+import { Layout } from './components';
+import { Dashboard, List } from './pages';
 import GlobalStyles from './styles/GlobalStyles';
 import { DarkTheme, LightTheme } from './styles/themes';
+import Routes from './routes/app.routes';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
     <>
-      <ThemeProvider theme={LightTheme}>
+      <ThemeProvider theme={DarkTheme}>
         <GlobalStyles/>
-        <Dashboard/>
+        <Layout>
+          <Router>
+            <Routes/>
+          </Router>
+        </Layout>
       </ThemeProvider>
     </>
   );

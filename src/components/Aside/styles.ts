@@ -4,7 +4,7 @@ export const Container = styled.div`
   grid-area: AS;
   color: ${props => props.theme.colors.black};
   background-color: ${props => props.theme.colors.white};
-  box-shadow: ${props => props.theme.shadows.shadow_sm};
+  box-shadow: ${props => props.theme.elevations.sm};
   padding-left: 20px;
 `;
 
@@ -27,7 +27,7 @@ export const Img = styled.img`
 export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 1em;
+  margin-top: 1rem;
 `
 
 export const MenuItemLink = styled.a`
