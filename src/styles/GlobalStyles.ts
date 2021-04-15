@@ -7,7 +7,9 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   html, body, #root {
-    height: 100%
+    height: 100%;
+    background-color: ${props => props.theme.colors.light};
+    color: ${props => props.theme.colors.black};
   }
   *, button, input {
     border: 0;
