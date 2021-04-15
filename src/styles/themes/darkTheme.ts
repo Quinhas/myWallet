@@ -40,17 +40,17 @@ let customColors = {
   complementary: '#FCAC0D'
 }
 
-let shadows = {
-	shadow: `0 .5rem 1rem ${Color.rgb(customColors.dark).alpha(0.15)}`,
-	shadow_sm: `0 .125rem .25rem ${Color.rgb(customColors.dark).alpha(0.15)}`,
-	shadow_lg: `0 1rem 3rem ${Color.rgb(customColors.dark).alpha(0.15)}`,
-	shadow_inset: `inset 0 1px 2px ${Color.rgb(customColors.dark).alpha(0.15)}`,
+let elevations = {
+	sm: `0px 2px 4px ${Color.rgb(defaultColors.white).alpha(0.24)};`,
+	md: `0px 4px 8px ${Color.rgb(defaultColors.white).alpha(0.16)};`,
+	lg: `0px 8px 16px ${Color.rgb(defaultColors.white).alpha(0.12)};`,
+	xl: `0px 16px 24px ${Color.rgb(defaultColors.white).alpha(0.12)};`,
 };
 
 const darkTheme = {
   title: 'dark',
   colors: {...defaultColors, ...gray, ...customColors},
-  shadows: shadows
+  elevations: elevations
 };
 
 

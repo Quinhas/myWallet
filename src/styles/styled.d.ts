@@ -35,11 +35,11 @@ declare module 'styled-components' {
       dark: string;
       complementary: string
     },
-    shadows: {
-      shadow: string;
-      shadow_sm: string;
-      shadow_lg: string;
-      shadow_inset: string;
+    elevations: {
+      sm: string;
+      md: string;
+      lg: string;
+      xl: string;
     };
   };
   
