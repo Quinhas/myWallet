@@ -1,4 +1,3 @@
-import { SelectInput } from "../../components";
 import { Container, TitleContainer, Controllers } from "./styles";
 
 interface IContentHeaderProps {
