@@ -47,9 +47,10 @@ let elevations = {
 	xl: `0px 16px 24px ${Color.rgb(customColors.dark).alpha(0.12)};`,
 };
 
-
-export default {
+const lightTheme = {
 	title: 'light',
 	colors: {...defaultColors, ...gray, ...customColors},
   elevations: elevations
 };
+
+export default lightTheme;

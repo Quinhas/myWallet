@@ -2,6 +2,9 @@ import { useMemo, useState, useEffect } from "react";
 import { ContentHeader, HistoryFinanceCard, SelectInput } from "../../components";
 import { Button, Container, Content, Filters } from "./styles";
 import { Expenses, Gains } from '../../repositories';
+import { formatCurrency, monthsList } from "../../utils";
+import moment from "moment";
+import 'moment/locale/pt-br';
 
 interface IListProps {
   match: {
@@ -21,6 +24,8 @@ interface IData {
 
 const List: React.FC<IListProps> = (props) => {
   const [data, setData] = useState<IData[]>([]);
+  const [monthSelected, setMonthSelected] = useState<string>(String(moment().month() + 1));
+  const [yearSelected, setYearSelected] = useState<string>(String(moment().year()));
 
   const { type } = props.match.params;
   const config = useMemo(() => {
@@ -31,49 +36,60 @@ const List: React.FC<IListProps> = (props) => {
     return type === 'entry-balance' ? Gains : Expenses;
   }, [type]);
 
-  const months = [
-    {
-      value: 5, label: 'Maio',
-    },
-    {
-      value: 6, label: 'Junho',
-    },
-    {
-      value: 7, label: 'Julho',
-    }
-  ];
-  const years = [
-    {
-      value: 2020, label: 2020,
-    },
-    {
-      value: 2019, label: 2019,
-    },
-    {
-      value: 2018, label: 2018,
-    }
-  ];
+  const years = useMemo(() => {
+    let uniqueYears: number[] = [];
+
+    listData.forEach(item => {
+      const year = moment(item.date).year();
+      if (!uniqueYears.includes(year)) {
+        uniqueYears.push(year)
+      }
+    });
+
+    return uniqueYears.map(year => {
+      return {
+        value: year,
+        label: year
+      }
+    })
+  }, [listData])
+  
+  const months = useMemo(() => {
+    return monthsList.map((month, index) => {
+      return {
+        value: index + 1,
+        label: month
+      }
+    });
+  }, [])
 
   
   useEffect(() => {
-    const response = listData.map(item => {
+    const filteredDate = listData.filter(item => {
+      const date = moment(item.date).utc().format();
+      const month = String(moment(date).month() + 1);
+      const year = String(moment(date).year());
+      return month === monthSelected && year === yearSelected;
+    });
+
+    const response = filteredDate.map(item => {
       return {
         description: item.description,
-        amountFormatted: item.amount,
+        amountFormatted: formatCurrency(Number(item.amount)),
         frequency: item.frequency,
-        dateFormatted: item.date,
+        dateFormatted: moment(item.date).local().format('L'),
         tagColor: item.frequency === 'recorrente' ? '#20c997' : '#0dcaf0'
       }
     })
     setData(response)
-  }, [listData])
+  }, [listData, monthSelected, yearSelected])
 
   return (
     <>
       <Container>
         <ContentHeader title={config.title} lineColor={config.lineColor}>
-          <SelectInput options={months}/>
-          <SelectInput options={years}/>
+          <SelectInput defaultValue={monthSelected} options={months} onChange={(e) => setMonthSelected(e.target.value)}/>
+          <SelectInput defaultValue={yearSelected} options={years} onChange={(e) => setYearSelected(e.target.value)}/>
         </ContentHeader>
 
         <Filters>
@@ -83,7 +99,10 @@ const List: React.FC<IListProps> = (props) => {
 
         <Content>
           {
-            data.map((item, index) => (
+            data.length === 0 && <p style={{textAlign: 'center', paddingTop: '1rem'}}>Não existem dados neste mês.</p>
+          }
+          {
+            data.length !== 0 && data.map((item, index) => (
               <HistoryFinanceCard key={index} tagColor={item.tagColor} title={item.description} subtitle={item.dateFormatted} amount={item.amountFormatted} />
             ))
           }
