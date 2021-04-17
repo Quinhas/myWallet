@@ -1,6 +1,6 @@
-import Color from 'color';
+import Color from 'color'
 
-let defaultColors = {
+const defaultColors = {
   blue: '#0d6efd',
   indigo: '#6610f2',
   purple: '#6f42c1',
@@ -15,7 +15,7 @@ let defaultColors = {
   black: '#fff'
 }
 
-let gray = {
+const gray = {
   gray100: Color(defaultColors.black).darken(0.1).negate().hex(),
   gray200: Color(defaultColors.black).darken(0.2).negate().hex(),
   gray300: Color(defaultColors.black).darken(0.3).negate().hex(),
@@ -27,7 +27,7 @@ let gray = {
   gray900: Color(defaultColors.black).darken(0.9).negate().hex()
 }
 
-let customColors = {
+const customColors = {
   primary: defaultColors.blue,
   secondary: Color(defaultColors.blue).darken(0.3).hex(),
   tertiary: Color(defaultColors.blue).darken(0.8).hex(),
@@ -35,23 +35,28 @@ let customColors = {
   info: defaultColors.cyan,
   warning: defaultColors.yellow,
   danger: defaultColors.red,
-  light: gray.gray500,
+  light: gray.gray100,
   dark: gray.gray900,
   complementary: '#FCAC0D'
 }
 
-let elevations = {
-	sm: `0px 2px 4px ${Color.rgb(defaultColors.white).alpha(0.24)};`,
-	md: `0px 4px 8px ${Color.rgb(defaultColors.white).alpha(0.16)};`,
-	lg: `0px 8px 16px ${Color.rgb(defaultColors.white).alpha(0.12)};`,
-	xl: `0px 16px 24px ${Color.rgb(defaultColors.white).alpha(0.12)};`,
-};
+const elevations = {
+  sm: `0px 2px 4px ${Color.rgb(defaultColors.white).alpha(0.24)};`,
+  md: `0px 4px 8px ${Color.rgb(defaultColors.white).alpha(0.16)};`,
+  lg: `0px 8px 16px ${Color.rgb(defaultColors.white).alpha(0.12)};`,
+  xl: `0px 16px 24px ${Color.rgb(defaultColors.white).alpha(0.12)};`
+}
+
+const getColorContrast = (color: any) => {
+  console.log(color)
+  return Color(color).isLight() ? 'black' : 'white'
+}
 
 const darkTheme = {
   title: 'dark',
-  colors: {...defaultColors, ...gray, ...customColors},
-  elevations: elevations
-};
+  colors: { ...defaultColors, ...gray, ...customColors },
+  elevations: elevations,
+  getColorContrast
+}
 
-
-export default darkTheme;
+export default darkTheme

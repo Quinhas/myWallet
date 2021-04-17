@@ -3,8 +3,9 @@ import {ContentHeader, HistoryFinanceCard, SelectInput} from '../../components';
 import {Button, Container, Content, Filters} from './styles';
 import {Expenses, Gains} from '../../repositories';
 import {formatCurrency, monthsList} from '../../utils';
-import moment from 'moment';
-import 'moment/locale/pt-br';
+import { getMonth, getYear } from 'date-fns';
+import { format } from 'date-fns/esm';
+import { ptBR } from 'date-fns/esm/locale';
 
 interface IListProps {
   match: {
@@ -24,8 +25,8 @@ interface IData {
 
 const List: React.FC<IListProps> = (props) => {
   const [data, setData] = useState<IData[]>([]);
-  const [monthSelected, setMonthSelected] = useState<number>(moment().month() + 1);
-  const [yearSelected, setYearSelected] = useState<number>(moment().year());
+  const [monthSelected, setMonthSelected] = useState<number>(getMonth(new Date()) + 1);
+  const [yearSelected, setYearSelected] = useState<number>(getYear(new Date()));
   const [frequencySelected, setFrequencySelected] = useState(['recorrente', 'eventual']);
 
   const {type} = props.match.params;
@@ -38,7 +39,7 @@ const List: React.FC<IListProps> = (props) => {
     let uniqueYears: number[] = [];
 
     config.listData.forEach((item) => {
-      const year = moment(item.date).year();
+      const year = getYear(new Date(item.date))
       if (!uniqueYears.includes(year)) {
         uniqueYears.push(year);
       }
@@ -85,9 +86,8 @@ const List: React.FC<IListProps> = (props) => {
 
   useEffect(() => {
     const filteredDate = config.listData.filter((item) => {
-      const date = moment(item.date).utc().format();
-      const month = moment(date).month() + 1;
-      const year = moment(date).year();
+      const month = getMonth(new Date(item.date)) + 1;
+      const year = getYear(new Date(item.date));
       return month === monthSelected && year === yearSelected && frequencySelected.includes(item.frequency);
     });
 
@@ -96,7 +96,7 @@ const List: React.FC<IListProps> = (props) => {
         description: item.description,
         amountFormatted: formatCurrency(Number(item.amount)),
         frequency: item.frequency,
-        dateFormatted: moment(item.date).local().format('L'),
+        dateFormatted: format(new Date(item.date), 'P', {locale: ptBR}),
         tagColor: item.frequency === 'recorrente' ? '#20c997' : '#0dcaf0',
       };
     });

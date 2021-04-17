@@ -40,7 +40,8 @@ declare module 'styled-components' {
       md: string;
       lg: string;
       xl: string;
-    };
+    },
+    getColorContrast(color: any): any
   };
   
 }

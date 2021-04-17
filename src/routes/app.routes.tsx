@@ -4,7 +4,7 @@ import { Dashboard, List } from '../pages';
 
 const AppRoutes: React.FC = () => (
   <Switch>
-    <Route path="/dashboard" exact component={Dashboard}></Route>
+    <Route path="/dashboard" component={Dashboard}></Route>
     <Route path="/list/:type" component={List}></Route>
   </Switch>
 );
