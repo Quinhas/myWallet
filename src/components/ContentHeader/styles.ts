@@ -12,7 +12,7 @@ export const Container = styled.div`
 
 export const TitleContainer = styled.div<ITitleContanerProps>`
   > h1 {
-    color: ${props => props.theme.colors.dark};
+    color: ${props => props.theme.getColorContrast(props.theme.colors.light)};
     &::after {
       content: '';
       display: block;
