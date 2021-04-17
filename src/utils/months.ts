@@ -1,5 +1,5 @@
-import moment from "moment";
-import 'moment/locale/pt-br'
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 const capitalize = (string: string): string => {
   if (typeof string !== 'string') return ''
@@ -7,18 +7,18 @@ const capitalize = (string: string): string => {
 }
 
 const months = [
-  capitalize(moment().month(0).format("MMMM")),
-  capitalize(moment().month(1).format("MMMM")),
-  capitalize(moment().month(2).format("MMMM")),
-  capitalize(moment().month(3).format("MMMM")),
-  capitalize(moment().month(4).format("MMMM")),
-  capitalize(moment().month(5).format("MMMM")),
-  capitalize(moment().month(6).format("MMMM")),
-  capitalize(moment().month(7).format("MMMM")),
-  capitalize(moment().month(8).format("MMMM")),
-  capitalize(moment().month(9).format("MMMM")),
-  capitalize(moment().month(10).format("MMMM")),
-  capitalize(moment().month(11).format("MMMM")),
+  capitalize(format(new Date().setMonth(0), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(1), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(2), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(3), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(4), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(5), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(6), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(7), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(8), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(9), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(10), 'MMMM', {locale: ptBR})),
+  capitalize(format(new Date().setMonth(11), 'MMMM', {locale: ptBR}))
 ]
 
 export default months;
