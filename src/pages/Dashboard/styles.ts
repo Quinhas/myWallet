@@ -5,3 +5,9 @@ export const Container = styled.div``;
 export const Title = styled.h4``;
 
 export const Controllers = styled.div``;
+
+export const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
